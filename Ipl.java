@@ -10,13 +10,16 @@ public class Ipl{
             int team_count=1;
             while((line=br.readLine()) != null){    
                 String[] values=  line.split(",");
-                if(total_matches.get(values[1])==null){
-                    team_count=1;
-                    total_matches.put(values[1], team_count);
-                }else{
-                    team_count=team_count+1;
-                    total_matches.put(values[1], team_count);
-                }
+                try {
+                    Integer.parseInt(values[1]);
+                    if(total_matches.get(values[1])==null){
+                        team_count=1;
+                        total_matches.put(values[1], team_count);
+                    }else{
+                        team_count=team_count+1;
+                        total_matches.put(values[1], team_count);
+                    }
+                } catch (Exception e) {}
             }
             System.out.println(total_matches);
         }catch(Exception e){
