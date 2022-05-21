@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,7 +27,7 @@ class Matches_won_class{
 public class Ipl{
     public static void main(String[] args){
         String line="";
-        try (BufferedReader br = new BufferedReader(new FileReader("/media/syam/Others/matches.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("/home/syam/Documents/Ipl Project/matches.csv"))) {
             ArrayList<String> total_matches =new ArrayList<String>();
             ArrayList<String> won_matches =new ArrayList<String>();
             while((line=br.readLine()) != null){    
@@ -35,13 +36,28 @@ public class Ipl{
                     Integer.parseInt(values[1]);
                     total_matches.add(values[1]);
                     won_matches.add(values[4]);
+                    if(Integer.parseInt(values[1])==2016){
+                        String match_won= values[10]+" Won Match By ";
+                        if(Integer.parseInt(values[11])==0){
+                                match_won=match_won+values[12]+" Wickets";
+                        }else{
+                            match_won=match_won+values[11]+" Runs";
+                        }
+                        System.out.println(match_won);
+                    }
+                   
                 } catch (Exception e) {}
             }
+            System.out.println("***************************");
             Total_matches_class tmc=new Total_matches_class();
             tmc.print_total_matches(total_matches);
             System.out.println("***************************");
             Matches_won_class mwc=new Matches_won_class();
             mwc.print_won_matches(won_matches);
+            System.out.println("***************************");
+            // System.out.println(extra_runs);
+
+            
         }catch(Exception e){
             System.out.println(e);
         }
